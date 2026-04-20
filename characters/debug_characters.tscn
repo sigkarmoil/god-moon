@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://dhei0ir8st2wi" path="res://entities/characters/audio/debug_dodge_attack.mp3" id="5_snd"]
 [ext_resource type="AudioStream" uid="uid://ca75ct2cdu3s3" path="res://entities/characters/audio/debug_player_take_damage.mp3" id="6_snd"]
 [ext_resource type="AudioStream" uid="uid://dbg6cc26br33p" path="res://entities/characters/audio/debug_relic_use.mp3" id="7_snd"]
+[ext_resource type="Script" uid="uid://c6cwdbvrmcxwf" path="res://scenes/player.gd" id="Script_player"]
 
 [sub_resource type="Shader" id="Shader_1"]
 code = "shader_type canvas_item;
@@ -46,38 +47,36 @@ animation = &"player_use_relic"
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r50yq"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jpxeg"]
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qyc7p"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2x160"]
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_puvv3"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vvkw4"]
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="StateMachine_1"]
+states/Start/position = Vector2(91, 155)
 states/player_counter_dodge/node = SubResource("AnimNode_dodge")
-states/player_counter_dodge/position = Vector2(530, 137)
+states/player_counter_dodge/position = Vector2(596, 258)
 states/player_counter_parry/node = SubResource("AnimNode_parry")
-states/player_counter_parry/position = Vector2(530, 33)
+states/player_counter_parry/position = Vector2(518, 87)
 states/player_defeated/node = SubResource("AnimNode_defeated")
 states/player_defeated/position = Vector2(809, 325)
 states/player_idle/node = SubResource("AnimNode_idle")
-states/player_idle/position = Vector2(339, 100)
+states/player_idle/position = Vector2(287, 264)
 states/player_take_damage/node = SubResource("AnimNode_damage")
-states/player_take_damage/position = Vector2(701, 168)
+states/player_take_damage/position = Vector2(820, 245)
 states/player_use_relic/node = SubResource("AnimNode_relic")
-states/player_use_relic/position = Vector2(498, 313)
+states/player_use_relic/position = Vector2(416, 386)
 transitions = ["Start", "player_idle", SubResource("AnimationNodeStateMachineTransition_levtn"), "player_idle", "player_counter_parry", SubResource("AnimationNodeStateMachineTransition_r50yq"), "player_counter_parry", "player_idle", SubResource("AnimationNodeStateMachineTransition_jpxeg"), "player_idle", "player_counter_dodge", SubResource("AnimationNodeStateMachineTransition_qyc7p"), "player_counter_dodge", "player_idle", SubResource("AnimationNodeStateMachineTransition_2x160"), "player_idle", "player_use_relic", SubResource("AnimationNodeStateMachineTransition_puvv3"), "player_use_relic", "player_idle", SubResource("AnimationNodeStateMachineTransition_vvkw4")]
-graph_offset = Vector2(54.885185, 0)
+graph_offset = Vector2(-151.56348, -34.260105)
 
 [sub_resource type="Animation" id="Animation_levtn"]
 length = 0.001
@@ -184,7 +183,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Anim_idle"]
 resource_name = "player_idle"
 length = 0.016666668
-loop_mode = 1
 step = 0.0167
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -284,6 +282,9 @@ _data = {
 size = Vector2(113, 66)
 
 [node name="Player" type="CharacterBody2D" unique_id=163773797]
+script = ExtResource("Script_player")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1230703053]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2038065466]
 material = SubResource("ShaderMaterial_1")
@@ -300,7 +301,6 @@ position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_jpxeg")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=527640804]
-active = false
 tree_root = SubResource("StateMachine_1")
 anim_player = NodePath("../anim")
 
