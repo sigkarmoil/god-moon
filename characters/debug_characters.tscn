@@ -93,6 +93,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [1]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player_hurtbox2:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Anim_dodge"]
 resource_name = "player_counter_dodge"
@@ -110,6 +122,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [14, 15, 16, 17, 18, 19, 20]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player_hurtbox2:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3635981),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Anim_parry"]
 resource_name = "player_counter_parry"
@@ -126,6 +150,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [6, 7, 8, 9, 10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player_hurtbox2:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.11379788, 0.30669916),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Anim_defeated"]
@@ -147,7 +183,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Anim_idle"]
 resource_name = "player_idle"
-length = 0.1
+length = 0.016666668
 loop_mode = 1
 step = 0.0167
 tracks/0/type = "value"
@@ -162,10 +198,23 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player_hurtbox2:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Anim_damage"]
 resource_name = "player_take_damage"
-length = 0.1
+length = 0.083333336
+step = 0.0167
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -178,10 +227,22 @@ tracks/0/keys = {
 "update": 1,
 "values": [4, 5, 6]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player_hurtbox2:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.08011423),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
 
 [sub_resource type="Animation" id="Anim_relic"]
 resource_name = "player_use_relic"
-length = 0.2
+length = 0.18333334
 step = 0.0167
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -195,19 +256,17 @@ tracks/0/keys = {
 "update": 1,
 "values": [11, 12, 13]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".")
+tracks/1/path = NodePath("player_hurtbox2:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_on_relic_start"
-}]
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimLib_1"]
@@ -224,7 +283,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r50yq"]
 size = Vector2(113, 66)
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=163773797]
+[node name="Player" type="CharacterBody2D" unique_id=163773797]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2038065466]
 material = SubResource("ShaderMaterial_1")
