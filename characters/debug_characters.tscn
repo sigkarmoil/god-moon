@@ -1,0 +1,276 @@
+[gd_scene format=3 uid="uid://bxdup8d8ebpb8"]
+
+[ext_resource type="AudioStream" uid="uid://c0dpp2m8p4xmu" path="res://entities/characters/audio/debug_player_nice_parry.mp3" id="2_snd"]
+[ext_resource type="AudioStream" uid="uid://bvskwpcps7vlt" path="res://entities/characters/audio/debug_parry_attack.mp3" id="3_snd"]
+[ext_resource type="AudioStream" uid="uid://b23lbklg1iqeo" path="res://entities/characters/audio/debug_nice_dodge.mp3" id="4_snd"]
+[ext_resource type="AudioStream" uid="uid://dhei0ir8st2wi" path="res://entities/characters/audio/debug_dodge_attack.mp3" id="5_snd"]
+[ext_resource type="AudioStream" uid="uid://ca75ct2cdu3s3" path="res://entities/characters/audio/debug_player_take_damage.mp3" id="6_snd"]
+[ext_resource type="AudioStream" uid="uid://dbg6cc26br33p" path="res://entities/characters/audio/debug_relic_use.mp3" id="7_snd"]
+[ext_resource type="Script" uid="uid://frlkg7s5adua" path="res://entities/characters/player_character.gd" id="8_scr"]
+
+[sub_resource type="Shader" id="Shader_1"]
+code = "shader_type canvas_item;
+uniform float vulnerable : hint_range(0.0, 1.0) = 0.0;
+void fragment() {
+	vec4 col = texture(TEXTURE, UV);
+	COLOR = mix(col, vec4(1.0, 0.0, 0.0, col.a), vulnerable);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+shader = SubResource("Shader_1")
+shader_parameter/vulnerable = 0.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_levtn"]
+load_path = "res://.godot/imported/debug_player_animation.png-ad1a037ef906037ee34ce8a7e4291fcb.ctex"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jpxeg"]
+radius = 6.0
+height = 16.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimNode_dodge"]
+animation = &"player_counter_dodge"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimNode_parry"]
+animation = &"player_counter_parry"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimNode_defeated"]
+animation = &"player_defeated"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimNode_idle"]
+animation = &"player_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimNode_damage"]
+animation = &"player_take_damage"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimNode_relic"]
+animation = &"player_use_relic"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_levtn"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r50yq"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jpxeg"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qyc7p"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2x160"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_puvv3"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vvkw4"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="StateMachine_1"]
+states/player_counter_dodge/node = SubResource("AnimNode_dodge")
+states/player_counter_dodge/position = Vector2(530, 137)
+states/player_counter_parry/node = SubResource("AnimNode_parry")
+states/player_counter_parry/position = Vector2(530, 33)
+states/player_defeated/node = SubResource("AnimNode_defeated")
+states/player_defeated/position = Vector2(809, 325)
+states/player_idle/node = SubResource("AnimNode_idle")
+states/player_idle/position = Vector2(339, 100)
+states/player_take_damage/node = SubResource("AnimNode_damage")
+states/player_take_damage/position = Vector2(701, 168)
+states/player_use_relic/node = SubResource("AnimNode_relic")
+states/player_use_relic/position = Vector2(498, 313)
+transitions = ["Start", "player_idle", SubResource("AnimationNodeStateMachineTransition_levtn"), "player_idle", "player_counter_parry", SubResource("AnimationNodeStateMachineTransition_r50yq"), "player_counter_parry", "player_idle", SubResource("AnimationNodeStateMachineTransition_jpxeg"), "player_idle", "player_counter_dodge", SubResource("AnimationNodeStateMachineTransition_qyc7p"), "player_counter_dodge", "player_idle", SubResource("AnimationNodeStateMachineTransition_2x160"), "player_idle", "player_use_relic", SubResource("AnimationNodeStateMachineTransition_puvv3"), "player_use_relic", "player_idle", SubResource("AnimationNodeStateMachineTransition_vvkw4")]
+graph_offset = Vector2(54.885185, 0)
+
+[sub_resource type="Animation" id="Animation_levtn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Anim_dodge"]
+resource_name = "player_counter_dodge"
+length = 0.6
+step = 0.0167
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.11666666, 0.21666667, 0.31666666, 0.38333333, 0.45, 0.51666665),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [14, 15, 16, 17, 18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Anim_parry"]
+resource_name = "player_counter_parry"
+length = 0.383333
+step = 0.0167
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.116667, 0.183333, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10]
+}
+
+[sub_resource type="Animation" id="Anim_defeated"]
+resource_name = "player_defeated"
+length = 0.4
+step = 0.0167
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.21666667, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [21, 22, 23, 24, 25, 26, 27]
+}
+
+[sub_resource type="Animation" id="Anim_idle"]
+resource_name = "player_idle"
+length = 0.1
+step = 0.0167
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Anim_damage"]
+resource_name = "player_take_damage"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Anim_relic"]
+resource_name = "player_use_relic"
+length = 0.2
+step = 0.0167
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [11, 12, 13]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_relic_start"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimLib_1"]
+_data = {
+&"RESET": SubResource("Animation_levtn"),
+&"player_counter_dodge": SubResource("Anim_dodge"),
+&"player_counter_parry": SubResource("Anim_parry"),
+&"player_defeated": SubResource("Anim_defeated"),
+&"player_idle": SubResource("Anim_idle"),
+&"player_take_damage": SubResource("Anim_damage"),
+&"player_use_relic": SubResource("Anim_relic")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r50yq"]
+size = Vector2(113, 66)
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=163773797]
+script = ExtResource("8_scr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2038065466]
+material = SubResource("ShaderMaterial_1")
+texture = SubResource("CompressedTexture2D_levtn")
+hframes = 7
+vframes = 4
+frame = 1
+region_enabled = true
+region_rect = Rect2(-1, -6, 351, 250)
+region_filter_clip_enabled = true
+
+[node name="player_hurtbox2" type="CollisionShape2D" parent="." unique_id=2046313342]
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_jpxeg")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=527640804]
+tree_root = SubResource("StateMachine_1")
+anim_player = NodePath("../anim")
+
+[node name="anim" type="AnimationPlayer" parent="." unique_id=555225323]
+libraries/ = SubResource("AnimLib_1")
+
+[node name="SFX_NiceParry" type="AudioStreamPlayer" parent="." unique_id=1257582653]
+stream = ExtResource("2_snd")
+
+[node name="SFX_InflictParry" type="AudioStreamPlayer" parent="." unique_id=2075309072]
+stream = ExtResource("3_snd")
+
+[node name="SFX_DodgeSuccess" type="AudioStreamPlayer" parent="." unique_id=1682858541]
+stream = ExtResource("4_snd")
+
+[node name="SFX_InflictDodge" type="AudioStreamPlayer" parent="." unique_id=1238946824]
+stream = ExtResource("5_snd")
+
+[node name="SFX_TakeDamage" type="AudioStreamPlayer" parent="." unique_id=859872332]
+stream = ExtResource("6_snd")
+
+[node name="SFX_RelicUse" type="AudioStreamPlayer" parent="." unique_id=1812747786]
+stream = ExtResource("7_snd")
+
+[node name="player_attack_area" type="Area2D" parent="." unique_id=1974618797]
+
+[node name="player_attack_area" type="CollisionShape2D" parent="player_attack_area" unique_id=773418554]
+position = Vector2(56.5, -42)
+shape = SubResource("RectangleShape2D_r50yq")
+debug_color = Color(0.7879856, 0.21802005, 0.90848505, 0.41960785)
