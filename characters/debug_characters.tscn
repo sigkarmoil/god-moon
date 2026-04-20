@@ -1,12 +1,12 @@
-[gd_scene format=3 uid="uid://bxdup8d8ebpb8"]
+[gd_scene format=3 uid="uid://ohoh87dxtfv2"]
 
+[ext_resource type="Texture2D" uid="uid://tblf3eprmyuk" path="res://entities/characters/debug_player_animation.png" id="2_1k46r"]
 [ext_resource type="AudioStream" uid="uid://c0dpp2m8p4xmu" path="res://entities/characters/audio/debug_player_nice_parry.mp3" id="2_snd"]
 [ext_resource type="AudioStream" uid="uid://bvskwpcps7vlt" path="res://entities/characters/audio/debug_parry_attack.mp3" id="3_snd"]
 [ext_resource type="AudioStream" uid="uid://b23lbklg1iqeo" path="res://entities/characters/audio/debug_nice_dodge.mp3" id="4_snd"]
 [ext_resource type="AudioStream" uid="uid://dhei0ir8st2wi" path="res://entities/characters/audio/debug_dodge_attack.mp3" id="5_snd"]
 [ext_resource type="AudioStream" uid="uid://ca75ct2cdu3s3" path="res://entities/characters/audio/debug_player_take_damage.mp3" id="6_snd"]
 [ext_resource type="AudioStream" uid="uid://dbg6cc26br33p" path="res://entities/characters/audio/debug_relic_use.mp3" id="7_snd"]
-[ext_resource type="Script" uid="uid://frlkg7s5adua" path="res://entities/characters/player_character.gd" id="8_scr"]
 
 [sub_resource type="Shader" id="Shader_1"]
 code = "shader_type canvas_item;
@@ -19,9 +19,6 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
 shader = SubResource("Shader_1")
 shader_parameter/vulnerable = 0.0
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_levtn"]
-load_path = "res://.godot/imported/debug_player_animation.png-ad1a037ef906037ee34ce8a7e4291fcb.ctex"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jpxeg"]
 radius = 6.0
@@ -151,6 +148,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Anim_idle"]
 resource_name = "player_idle"
 length = 0.1
+loop_mode = 1
 step = 0.0167
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -227,16 +225,15 @@ _data = {
 size = Vector2(113, 66)
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=163773797]
-script = ExtResource("8_scr")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2038065466]
 material = SubResource("ShaderMaterial_1")
-texture = SubResource("CompressedTexture2D_levtn")
+texture = ExtResource("2_1k46r")
 hframes = 7
 vframes = 4
 frame = 1
 region_enabled = true
-region_rect = Rect2(-1, -6, 351, 250)
+region_rect = Rect2(0, -3, 333, 256)
 region_filter_clip_enabled = true
 
 [node name="player_hurtbox2" type="CollisionShape2D" parent="." unique_id=2046313342]
@@ -244,6 +241,7 @@ position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_jpxeg")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=527640804]
+active = false
 tree_root = SubResource("StateMachine_1")
 anim_player = NodePath("../anim")
 
