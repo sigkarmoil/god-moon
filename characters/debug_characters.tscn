@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://ohoh87dxtfv2"]
 
+[ext_resource type="Script" uid="uid://foya0ybyn825" path="res://god-moon/characters/player_idle_state.gd" id="1_1k46r"]
 [ext_resource type="Texture2D" uid="uid://tblf3eprmyuk" path="res://entities/characters/debug_player_animation.png" id="2_1k46r"]
 [ext_resource type="AudioStream" uid="uid://c0dpp2m8p4xmu" path="res://entities/characters/audio/debug_player_nice_parry.mp3" id="2_snd"]
 [ext_resource type="AudioStream" uid="uid://bvskwpcps7vlt" path="res://entities/characters/audio/debug_parry_attack.mp3" id="3_snd"]
@@ -7,7 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://dhei0ir8st2wi" path="res://entities/characters/audio/debug_dodge_attack.mp3" id="5_snd"]
 [ext_resource type="AudioStream" uid="uid://ca75ct2cdu3s3" path="res://entities/characters/audio/debug_player_take_damage.mp3" id="6_snd"]
 [ext_resource type="AudioStream" uid="uid://dbg6cc26br33p" path="res://entities/characters/audio/debug_relic_use.mp3" id="7_snd"]
-[ext_resource type="Script" uid="uid://c6cwdbvrmcxwf" path="res://scenes/player.gd" id="Script_player"]
 
 [sub_resource type="Shader" id="Shader_1"]
 code = "shader_type canvas_item;
@@ -282,7 +282,7 @@ _data = {
 size = Vector2(113, 66)
 
 [node name="Player" type="CharacterBody2D" unique_id=163773797]
-script = ExtResource("Script_player")
+script = ExtResource("1_1k46r")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1230703053]
 
