@@ -1,22 +1,33 @@
 extends CharacterBody2D
 
-var animations: Array = [
+# Add new animation names here to include them in the random pool.
+var animations: Array[String] = [
+	"strong_attack",
 	"multi_attack",
-    "strong_attack"
 ]
 
-@export var pause_duration: float = 1.0
+const SEQUENCE_LENGTH: int = 3
 
-func _on_Timer_timeout() -> void:
-	await play_sequence(3)
-	await get_tree().create_timer(pause_duration).timeout
+var queued_sequence: Array[String] = []
+
+func _ready() -> void:
+	queued_sequence = build_sequence(SEQUENCE_LENGTH)
 	$Timer.start()
 
-func play_sequence(count: int):
-	var pool = animations.duplicate()
-	pool.shuffle()
-	var selected = pool.slice(0, count)
+func _on_timer_timeout() -> void:
+	await play_sequence(queued_sequence)
+	queued_sequence = build_sequence(SEQUENCE_LENGTH)
+	$Timer.start()
 
-	for anim in selected:
-		$AnimationPlayer.play(anim)
-		await $AnimationPlayer.animation_finished
+func build_sequence(count: int) -> Array[String]:
+	var pool := animations.duplicate()
+	pool.shuffle()
+	var sequence: Array[String] = []
+	for i in count:
+		sequence.append(pool[i % pool.size()])
+	return sequence
+
+func play_sequence(sequence: Array[String]) -> void:
+	for anim: String in sequence:
+		$anim.play(anim)
+		await $anim.animation_finished
