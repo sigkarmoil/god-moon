@@ -6,7 +6,8 @@ var animations: Array[String] = [
 	"multi_attack",
 ]
 
-const SEQUENCE_LENGTH: int = 3
+#length of animation
+const SEQUENCE_LENGTH: int = 1
 
 var queued_sequence: Array[String] = []
 

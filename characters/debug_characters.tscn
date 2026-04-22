@@ -232,6 +232,7 @@ size = Vector2(113, 66)
 script = ExtResource("1_1k46r")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1230703053]
+offset = Vector2(76, -36)
 zoom = Vector2(5, 5)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2038065466]

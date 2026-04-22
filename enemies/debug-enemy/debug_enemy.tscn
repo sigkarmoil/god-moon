@@ -79,10 +79,10 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jaal5"]
-radius = 64.899925
+radius = 46.173584
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jaal5"]
-size = Vector2(379.5, 152)
+size = Vector2(227.75, 54)
 
 [node name="debug_enemy" type="CharacterBody2D" unique_id=1960033771]
 script = ExtResource("1_pd7lb")
@@ -99,18 +99,17 @@ region_rect = Rect2(-1, 0, 387, 385)
 libraries/ = SubResource("AnimationLibrary_10347")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1158084526]
-position = Vector2(5, 3)
+position = Vector2(12, 2)
 shape = SubResource("CircleShape2D_jaal5")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=852180770]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=690105694]
-position = Vector2(-119, 159)
+position = Vector2(-90, 78)
 shape = SubResource("RectangleShape2D_jaal5")
 debug_color = Color(0.90977484, 0.2957548, 0.09832505, 0.41960785)
 
 [node name="Timer" type="Timer" parent="." unique_id=709978862]
-wait_time = 2.0
 autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1865708502]
