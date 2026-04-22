@@ -95,7 +95,7 @@ frame = 4
 region_enabled = true
 region_rect = Rect2(-1, 0, 387, 385)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1745223961]
+[node name="anim" type="AnimationPlayer" parent="." unique_id=1745223961]
 libraries/ = SubResource("AnimationLibrary_10347")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1158084526]
@@ -112,5 +112,7 @@ debug_color = Color(0.90977484, 0.2957548, 0.09832505, 0.41960785)
 [node name="Timer" type="Timer" parent="." unique_id=709978862]
 wait_time = 0.5
 autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1865708502]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
