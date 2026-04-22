@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://i316awpu2dvm"]
+
+[ext_resource type="Texture2D" uid="uid://drr3jrm7hbg4h" path="res://entities/bosses/debug_boss sheet.png" id="1_jaal5"]
+[ext_resource type="Script" uid="uid://sphb43d2f3x6" path="res://god-moon/enemies/debug-enemy/debug_enemy.gd" id="1_pd7lb"]
+
+[sub_resource type="Animation" id="Animation_pd7lb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_63dwk"]
+resource_name = "idle"
+length = 0.16666667
+loop_mode = 1
+step = 0.0167
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_nb0b1"]
+resource_name = "multi_attack"
+length = 0.26666668
+step = 0.0167
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_jaal5"]
+resource_name = "strong_attack"
+length = 0.81666666
+step = 0.0167
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.4, 0.6333333, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_10347"]
+_data = {
+&"RESET": SubResource("Animation_pd7lb"),
+&"idle": SubResource("Animation_63dwk"),
+&"multi_attack": SubResource("Animation_nb0b1"),
+&"strong_attack": SubResource("Animation_jaal5")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jaal5"]
+radius = 64.899925
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jaal5"]
+size = Vector2(379.5, 152)
+
+[node name="debug_enemy" type="CharacterBody2D" unique_id=1960033771]
+script = ExtResource("1_pd7lb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1364188514]
+texture = ExtResource("1_jaal5")
+hframes = 3
+vframes = 3
+frame = 4
+region_enabled = true
+region_rect = Rect2(-1, 0, 387, 385)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1745223961]
+libraries/ = SubResource("AnimationLibrary_10347")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1158084526]
+position = Vector2(5, 3)
+shape = SubResource("CircleShape2D_jaal5")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=852180770]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=690105694]
+position = Vector2(-119, 159)
+shape = SubResource("RectangleShape2D_jaal5")
+debug_color = Color(0.90977484, 0.2957548, 0.09832505, 0.41960785)
+
+[node name="Timer" type="Timer" parent="." unique_id=709978862]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

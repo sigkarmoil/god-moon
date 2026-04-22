@@ -25,59 +25,6 @@ shader_parameter/vulnerable = 0.0
 radius = 6.0
 height = 16.0
 
-[sub_resource type="AnimationNodeAnimation" id="AnimNode_dodge"]
-animation = &"player_counter_dodge"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimNode_parry"]
-animation = &"player_counter_parry"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimNode_defeated"]
-animation = &"player_defeated"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimNode_idle"]
-animation = &"player_idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimNode_damage"]
-animation = &"player_take_damage"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimNode_relic"]
-animation = &"player_use_relic"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_levtn"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r50yq"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jpxeg"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qyc7p"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2x160"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_puvv3"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vvkw4"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="StateMachine_1"]
-states/Start/position = Vector2(91, 155)
-states/player_counter_dodge/node = SubResource("AnimNode_dodge")
-states/player_counter_dodge/position = Vector2(596, 258)
-states/player_counter_parry/node = SubResource("AnimNode_parry")
-states/player_counter_parry/position = Vector2(518, 87)
-states/player_defeated/node = SubResource("AnimNode_defeated")
-states/player_defeated/position = Vector2(809, 325)
-states/player_idle/node = SubResource("AnimNode_idle")
-states/player_idle/position = Vector2(287, 264)
-states/player_take_damage/node = SubResource("AnimNode_damage")
-states/player_take_damage/position = Vector2(820, 245)
-states/player_use_relic/node = SubResource("AnimNode_relic")
-states/player_use_relic/position = Vector2(416, 386)
-transitions = ["Start", "player_idle", SubResource("AnimationNodeStateMachineTransition_levtn"), "player_idle", "player_counter_parry", SubResource("AnimationNodeStateMachineTransition_r50yq"), "player_counter_parry", "player_idle", SubResource("AnimationNodeStateMachineTransition_jpxeg"), "player_idle", "player_counter_dodge", SubResource("AnimationNodeStateMachineTransition_qyc7p"), "player_counter_dodge", "player_idle", SubResource("AnimationNodeStateMachineTransition_2x160"), "player_idle", "player_use_relic", SubResource("AnimationNodeStateMachineTransition_puvv3"), "player_use_relic", "player_idle", SubResource("AnimationNodeStateMachineTransition_vvkw4")]
-graph_offset = Vector2(-151.56348, -34.260105)
-
 [sub_resource type="Animation" id="Animation_levtn"]
 length = 0.001
 tracks/0/type = "value"
@@ -116,7 +63,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.31666666, 0.38333333, 0.45, 0.51666665),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.25, 0.31666666, 0.36666667, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [14, 15, 16, 17, 18, 19, 20]
@@ -128,7 +75,7 @@ tracks/1/path = NodePath("player_hurtbox2:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3635981),
+"times": PackedFloat32Array(0, 0.26666668),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -136,7 +83,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Anim_parry"]
 resource_name = "player_counter_parry"
-length = 0.383333
+length = 0.3
 step = 0.0167
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -145,10 +92,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 0
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.116667, 0.183333, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [6, 7, 8, 9, 10]
+"values": [6, 7, 8, 10, 9]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -157,7 +104,7 @@ tracks/1/path = NodePath("player_hurtbox2:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.11379788, 0.30669916),
+"times": PackedFloat32Array(0.06666667, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -285,6 +232,7 @@ size = Vector2(113, 66)
 script = ExtResource("1_1k46r")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1230703053]
+zoom = Vector2(5, 5)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2038065466]
 material = SubResource("ShaderMaterial_1")
@@ -299,11 +247,6 @@ region_filter_clip_enabled = true
 [node name="player_hurtbox2" type="CollisionShape2D" parent="." unique_id=2046313342]
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_jpxeg")
-
-[node name="AnimationTree" type="AnimationTree" parent="." unique_id=527640804]
-active = false
-tree_root = SubResource("StateMachine_1")
-anim_player = NodePath("../anim")
 
 [node name="anim" type="AnimationPlayer" parent="." unique_id=555225323]
 libraries/ = SubResource("AnimLib_1")
