@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://ohoh87dxtfv2"]
 
+[ext_resource type="Script" uid="uid://foya0ybyn825" path="res://god-moon/characters/player_idle_state.gd" id="1_1k46r"]
 [ext_resource type="Texture2D" uid="uid://tblf3eprmyuk" path="res://entities/characters/debug_player_animation.png" id="2_1k46r"]
 [ext_resource type="AudioStream" uid="uid://c0dpp2m8p4xmu" path="res://entities/characters/audio/debug_player_nice_parry.mp3" id="2_snd"]
 [ext_resource type="AudioStream" uid="uid://bvskwpcps7vlt" path="res://entities/characters/audio/debug_parry_attack.mp3" id="3_snd"]
@@ -23,61 +24,6 @@ shader_parameter/vulnerable = 0.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jpxeg"]
 radius = 6.0
 height = 16.0
-
-[sub_resource type="AnimationNodeAnimation" id="AnimNode_dodge"]
-animation = &"player_counter_dodge"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimNode_parry"]
-animation = &"player_counter_parry"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimNode_defeated"]
-animation = &"player_defeated"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimNode_idle"]
-animation = &"player_idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimNode_damage"]
-animation = &"player_take_damage"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimNode_relic"]
-animation = &"player_use_relic"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_levtn"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r50yq"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jpxeg"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qyc7p"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2x160"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_puvv3"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vvkw4"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="StateMachine_1"]
-states/player_counter_dodge/node = SubResource("AnimNode_dodge")
-states/player_counter_dodge/position = Vector2(530, 137)
-states/player_counter_parry/node = SubResource("AnimNode_parry")
-states/player_counter_parry/position = Vector2(530, 33)
-states/player_defeated/node = SubResource("AnimNode_defeated")
-states/player_defeated/position = Vector2(809, 325)
-states/player_idle/node = SubResource("AnimNode_idle")
-states/player_idle/position = Vector2(339, 100)
-states/player_take_damage/node = SubResource("AnimNode_damage")
-states/player_take_damage/position = Vector2(701, 168)
-states/player_use_relic/node = SubResource("AnimNode_relic")
-states/player_use_relic/position = Vector2(498, 313)
-transitions = ["Start", "player_idle", SubResource("AnimationNodeStateMachineTransition_levtn"), "player_idle", "player_counter_parry", SubResource("AnimationNodeStateMachineTransition_r50yq"), "player_counter_parry", "player_idle", SubResource("AnimationNodeStateMachineTransition_jpxeg"), "player_idle", "player_counter_dodge", SubResource("AnimationNodeStateMachineTransition_qyc7p"), "player_counter_dodge", "player_idle", SubResource("AnimationNodeStateMachineTransition_2x160"), "player_idle", "player_use_relic", SubResource("AnimationNodeStateMachineTransition_puvv3"), "player_use_relic", "player_idle", SubResource("AnimationNodeStateMachineTransition_vvkw4")]
-graph_offset = Vector2(54.885185, 0)
 
 [sub_resource type="Animation" id="Animation_levtn"]
 length = 0.001
@@ -117,7 +63,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.11666666, 0.21666667, 0.31666666, 0.38333333, 0.45, 0.51666665),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.25, 0.31666666, 0.36666667, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [14, 15, 16, 17, 18, 19, 20]
@@ -129,7 +75,7 @@ tracks/1/path = NodePath("player_hurtbox2:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3635981),
+"times": PackedFloat32Array(0, 0.26666668),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -137,7 +83,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Anim_parry"]
 resource_name = "player_counter_parry"
-length = 0.383333
+length = 0.3
 step = 0.0167
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -146,10 +92,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 0
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.116667, 0.183333, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [6, 7, 8, 9, 10]
+"values": [6, 7, 8, 10, 9]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -158,7 +104,7 @@ tracks/1/path = NodePath("player_hurtbox2:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.11379788, 0.30669916),
+"times": PackedFloat32Array(0.06666667, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -166,7 +112,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Anim_defeated"]
 resource_name = "player_defeated"
-length = 0.4
+length = 0.8666667
 step = 0.0167
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -175,7 +121,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 0
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.21666667, 0.3, 0.35),
+"times": PackedFloat32Array(0, 0.2, 0.33333334, 0.41666666, 0.51666665, 0.6666667, 0.81666666),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [21, 22, 23, 24, 25, 26, 27]
@@ -183,7 +129,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Anim_idle"]
 resource_name = "player_idle"
-length = 0.016666668
 loop_mode = 1
 step = 0.0167
 tracks/0/type = "value"
@@ -193,10 +138,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [0, 1, 2, 1]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -242,7 +187,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Anim_relic"]
 resource_name = "player_use_relic"
-length = 0.18333334
+length = 0.3
 step = 0.0167
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -251,7 +196,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 0
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.16666667),
+"times": PackedFloat32Array(0, 0.13333334, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [11, 12, 13]
@@ -284,6 +229,11 @@ _data = {
 size = Vector2(113, 66)
 
 [node name="Player" type="CharacterBody2D" unique_id=163773797]
+script = ExtResource("1_1k46r")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1230703053]
+offset = Vector2(76, -36)
+zoom = Vector2(5, 5)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2038065466]
 material = SubResource("ShaderMaterial_1")
@@ -298,11 +248,6 @@ region_filter_clip_enabled = true
 [node name="player_hurtbox2" type="CollisionShape2D" parent="." unique_id=2046313342]
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_jpxeg")
-
-[node name="AnimationTree" type="AnimationTree" parent="." unique_id=527640804]
-active = false
-tree_root = SubResource("StateMachine_1")
-anim_player = NodePath("../anim")
 
 [node name="anim" type="AnimationPlayer" parent="." unique_id=555225323]
 libraries/ = SubResource("AnimLib_1")

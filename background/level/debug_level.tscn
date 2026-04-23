@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bhcj0qjnb04wy"]
+
+[ext_resource type="PackedScene" uid="uid://ohoh87dxtfv2" path="res://god-moon/characters/debug_characters.tscn" id="1_5mx0i"]
+[ext_resource type="Script" uid="uid://b20jdxklnpp1o" path="res://god-moon/background/level/debug_level.gd" id="1_d1mtj"]
+[ext_resource type="PackedScene" uid="uid://i316awpu2dvm" path="res://god-moon/enemies/debug-enemy/debug_enemy.tscn" id="2_d1mtj"]
+
+[node name="debug_level" type="Node2D" unique_id=286960787]
+script = ExtResource("1_d1mtj")
+
+[node name="debug_enemy" parent="." unique_id=1960033771 instance=ExtResource("2_d1mtj")]
+position = Vector2(79, -51)
+
+[node name="Player" parent="." unique_id=163773797 instance=ExtResource("1_5mx0i")]
