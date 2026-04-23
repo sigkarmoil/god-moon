@@ -4,10 +4,6 @@ extends Node2D
 #Set of variables to pass
 ################
 var turn_number = 1
-var turn_start: bool = false
-var preparation_phase: bool = true
-var enemy_defeated: bool = false
-var game_over: bool = false
 
 #################
 #Enemy loader
