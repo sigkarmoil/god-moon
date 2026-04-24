@@ -231,10 +231,6 @@ size = Vector2(113, 66)
 [node name="Player" type="CharacterBody2D" unique_id=163773797]
 script = ExtResource("1_1k46r")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1230703053]
-offset = Vector2(76, -36)
-zoom = Vector2(5, 5)
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2038065466]
 material = SubResource("ShaderMaterial_1")
 texture = ExtResource("2_1k46r")

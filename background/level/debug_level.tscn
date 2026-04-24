@@ -11,3 +11,12 @@ script = ExtResource("1_d1mtj")
 position = Vector2(79, -51)
 
 [node name="Player" parent="." unique_id=163773797 instance=ExtResource("1_5mx0i")]
+
+[node name="Timer" type="Timer" parent="." unique_id=2003021237]
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1393318606]
+offset = Vector2(65, -50)
+zoom = Vector2(4, 3)
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

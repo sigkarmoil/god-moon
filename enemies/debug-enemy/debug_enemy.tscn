@@ -108,10 +108,3 @@ shape = SubResource("CircleShape2D_jaal5")
 position = Vector2(-90, 78)
 shape = SubResource("RectangleShape2D_jaal5")
 debug_color = Color(0.90977484, 0.2957548, 0.09832505, 0.41960785)
-
-[node name="Timer" type="Timer" parent="." unique_id=709978862]
-autostart = true
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1865708502]
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

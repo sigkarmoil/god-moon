@@ -1,4 +1,7 @@
 extends CharacterBody2D
+
+signal sequence_finished
+
 #+++++++++++++++++++
 #Animation Sets
 #+++++++++++++++++++
@@ -15,59 +18,27 @@ var animation_set2: Array[String] = [
 ]
 #-------------------
 
-
-
-#length of animation
-#variable that holds the sequence. Simplify later
-const SEQUENCE_LENGTH: int = 1
-var queued_sequence: Array[String] = []
-
-#Success: this function is called by the level gdscript during test
-#func level_signal() -> void:
-	#print("level signal")
-
-func _ready() -> void:
-	$Timer.start()
-
-#+++++++++++++++++++++++++++++++
-#Pause before and after actions
-#+++++++++++++++++++++++++++++++
-func _on_timer_timeout() -> void:
-	queued_sequence = turn_1_picker(SEQUENCE_LENGTH)
-	await play_sequence(queued_sequence)
-
-
-#----------------------------------------
+#variable that holds the sequence
+var queued_sequence: String
 
 #+++++++++++++++++++++++++++++++
 #Action Picking / Playing function
 #+++++++++++++++++++++++++++++++
 ### For animation set 1
-func turn_1_picker(count: int) -> Array[String]:
-	var pool := animation_set1.duplicate()
-	pool.shuffle()
-	var sequence: Array[String] = []
-	for i in count:
-		sequence.append(pool[i % pool.size()])
-	return sequence
+func turn_1_picker() -> void:
+	var index := randi_range(0, animation_set1.size() - 1)
+	queued_sequence = animation_set1[index]
 
 ### For animation set 2
-func turn_2_picker(count: int) -> Array[String]:
-	var pool := animation_set2.duplicate()
-	pool.shuffle()
-	var sequence: Array[String] = []
-	for i in count:
-		sequence.append(pool[i % pool.size()])
-	return sequence
+func turn_2_picker() -> void:
+	var index := randi_range(0, animation_set2.size() - 1)
+	queued_sequence = animation_set1[index]
 
 #### Action Playing Function
-func play_sequence(sequence: Array[String]) -> void:
-	for anim: String in sequence:
-		$anim.play(anim)
-		await $anim.animation_finished
-		
-		
-		
+func play_sequence() -> void:
+	$anim.play(queued_sequence)
+	await $anim.animation_finished
+	emit_signal("sequence_finished")
 
 #----------------------------------------
 
@@ -77,8 +48,5 @@ func play_sequence(sequence: Array[String]) -> void:
 	#Function to receive the turn number from level. Determine the set of animation to perform
 func receive_turn_number(value: int) -> void:
 	print("Turn Number: ", value)
-	
-	#Function to see whether the preparation phase is starting or not
-	#Function to see whether the battle phase is starting or not
 
 #----------------------------------------
