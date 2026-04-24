@@ -13,6 +13,7 @@ position = Vector2(79, -51)
 [node name="Player" parent="." unique_id=163773797 instance=ExtResource("1_5mx0i")]
 
 [node name="Timer" type="Timer" parent="." unique_id=2003021237]
+wait_time = 0.5
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1393318606]
