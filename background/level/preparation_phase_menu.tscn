@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://nyiuwxh813mk"]
 
-[ext_resource type="Script" path="res://god-moon/background/level/preparation_phase_menu.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://bw4w4pdcxbv4o" path="res://god-moon/background/level/preparation_phase_menu.gd" id="1_script"]
 
-[node name="Preparation_phase_menu" type="Control"]
+[node name="Preparation_phase_menu" type="Control" unique_id=742750785]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=807723973]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

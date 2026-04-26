@@ -45,8 +45,6 @@ func play_sequence() -> void:
 #+++++++++++++++++++++++++++++++
 #A set of functions to receive data from levels
 #++++++++++++++++++++++++++++++++
-	#Function to receive the turn number from level. Determine the set of animation to perform
-func receive_turn_number(value: int) -> void:
-	print("Turn Number: ", value)
+
 
 #----------------------------------------
