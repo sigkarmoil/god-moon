@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 signal sequence_finished
 
+#
+
+
 #+++++++++++++++++++
 #Animation Sets
 #+++++++++++++++++++
@@ -43,8 +46,14 @@ func play_sequence() -> void:
 #----------------------------------------
 
 #+++++++++++++++++++++++++++++++
-#A set of functions to receive data from levels
+# Determine enemy attack type
 #++++++++++++++++++++++++++++++++
+var is_strong_attack: bool = false
 
+func mark_strong_attack() -> void:
+	is_strong_attack = true
+
+func mark_regular_attack() -> void:
+	is_strong_attack = false
 
 #----------------------------------------

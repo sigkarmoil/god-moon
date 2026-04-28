@@ -13,6 +13,7 @@ var _menu_instance: Node = null
 #Enemy loader , pick which enemy to pick
 #+++++++++++++++++++
 @onready var current_enemy = $debug_enemy
+@onready var player := $player_idle_state
 
 #--------------------
 
@@ -21,6 +22,10 @@ var _menu_instance: Node = null
 #On Ready: set animation to finished
 #
 func _ready() -> void:
+	## Pass enemy data to player. Useful to transmit attack type  ++
+	player.enemy = current_enemy
+	
+	
 	current_enemy.sequence_finished.connect(turn_number_increase)
 	enter_preparation_phase()
 

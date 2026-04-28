@@ -84,7 +84,7 @@ radius = 46.173584
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jaal5"]
 size = Vector2(227.75, 54)
 
-[node name="debug_enemy" type="CharacterBody2D" unique_id=1960033771]
+[node name="debug_enemy" type="CharacterBody2D" unique_id=1960033771 groups=["enemy"]]
 script = ExtResource("1_pd7lb")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1364188514]
@@ -97,13 +97,13 @@ region_rect = Rect2(-1, 0, 387, 385)
 [node name="anim" type="AnimationPlayer" parent="." unique_id=1745223961]
 libraries/ = SubResource("AnimationLibrary_10347")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1158084526]
+[node name="enemy_hurtbox" type="CollisionShape2D" parent="." unique_id=1158084526]
 position = Vector2(12, 2)
 shape = SubResource("CircleShape2D_jaal5")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=852180770]
+[node name="enemy_attack_area" type="Area2D" parent="." unique_id=852180770]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=690105694]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_attack_area" unique_id=690105694]
 position = Vector2(-90, 78)
 shape = SubResource("RectangleShape2D_jaal5")
 debug_color = Color(0.90977484, 0.2957548, 0.09832505, 0.41960785)
