@@ -10,14 +10,14 @@ signal sequence_finished
 #+++++++++++++++++++
 # Set of animations to be used at turn 1
 var animation_set1: Array[String] = [
-	"strong_attack",
-	"multi_attack",
+	
+	"multi_attack"
 ]
 
 # Set of animations to be used at turn 2
 var animation_set2: Array[String] = [
-	"strong_attack",
-	"multi_attack",
+	
+	"strong_attack"
 ]
 #-------------------
 
@@ -31,11 +31,13 @@ var queued_sequence: String
 func turn_1_picker() -> void:
 	var index := randi_range(0, animation_set1.size() - 1)
 	queued_sequence = animation_set1[index]
+	print("Odd turn loop")
 
 ### For animation set 2
 func turn_2_picker() -> void:
 	var index := randi_range(0, animation_set2.size() - 1)
-	queued_sequence = animation_set1[index]
+	queued_sequence = animation_set2[index]
+	print("Even turn loop")
 
 #### Action Playing Function
 func play_sequence() -> void:

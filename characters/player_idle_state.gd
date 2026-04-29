@@ -37,6 +37,7 @@ var is_dodging: bool = false
 func mark_parrying() -> void:
 	is_parrying = true
 	is_dodging = false
+	print (is_parrying)
 
 func mark_dodging() -> void:
 	is_dodging = true
@@ -52,7 +53,7 @@ func mark_neutral() -> void:
 func resolve_hit() -> void:
 	if is_dodging == true:
 		# dodge works against everything
-		print("Pslayer dodged")
+		print("Player dodged")
 		pass
 	elif is_parrying == true and enemy.is_strong_attack == false:
 		# parry only works against regular attacks
