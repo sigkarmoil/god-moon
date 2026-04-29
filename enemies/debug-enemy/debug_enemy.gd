@@ -57,3 +57,13 @@ func mark_regular_attack() -> void:
 	is_strong_attack = false
 
 #----------------------------------------
+
+
+#+++++++++++++++++++++++++++++++++++++++++
+#Enemy damage receival function
+#-----------------------------------------
+func _on_enemy_hurtbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("player_attack_area"): ##And attack type strong??
+		print("Enemy got hit")
+
+#-----------------------------------------

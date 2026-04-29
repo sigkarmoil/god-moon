@@ -13,7 +13,7 @@ var _menu_instance: Node = null
 #Enemy loader , pick which enemy to pick
 #+++++++++++++++++++
 @onready var current_enemy = $debug_enemy
-@onready var player := $player_idle_state
+@onready var player := $debug_characters
 
 #--------------------
 
@@ -23,7 +23,7 @@ var _menu_instance: Node = null
 #
 func _ready() -> void:
 	## Pass enemy data to player. Useful to transmit attack type  ++
-	player.enemy = current_enemy
+	assign_player()
 	
 	
 	current_enemy.sequence_finished.connect(turn_number_increase)
@@ -78,3 +78,10 @@ func _on_Timer_timeout() -> void:
 func turn_number_increase() -> void:
 	turn_number += 1
 	enter_preparation_phase()
+
+
+#++++++++++++++++
+#+++++++++++++++
+func assign_player() -> void:
+	player.enemy = current_enemy
+#--------------------

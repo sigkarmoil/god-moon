@@ -17,6 +17,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [4]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("enemy_attack_area/enemy_attack_area:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_63dwk"]
 resource_name = "idle"
@@ -35,6 +47,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("enemy_attack_area/enemy_attack_area:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_nb0b1"]
 resource_name = "multi_attack"
@@ -51,6 +75,32 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("enemy_attack_area/enemy_attack_area:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.30235225, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"mark_regular_attack"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_jaal5"]
@@ -69,6 +119,32 @@ tracks/0/keys = {
 "update": 1,
 "values": [6, 7, 8, 9, 10]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("enemy_attack_area/enemy_attack_area:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.53135276, 0.56666666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"mark_strong_attack"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_10347"]
 _data = {
@@ -78,13 +154,13 @@ _data = {
 &"strong_attack": SubResource("Animation_jaal5")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jaal5"]
-radius = 46.173584
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jaal5"]
 size = Vector2(227.75, 54)
 
-[node name="debug_enemy" type="CharacterBody2D" unique_id=1960033771 groups=["enemy"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_pd7lb"]
+radius = 49.658836
+
+[node name="debug_enemy" type="CharacterBody2D" unique_id=1960033771]
 script = ExtResource("1_pd7lb")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1364188514]
@@ -97,13 +173,21 @@ region_rect = Rect2(-1, 0, 387, 385)
 [node name="anim" type="AnimationPlayer" parent="." unique_id=1745223961]
 libraries/ = SubResource("AnimationLibrary_10347")
 
-[node name="enemy_hurtbox" type="CollisionShape2D" parent="." unique_id=1158084526]
+[node name="enemy_collider" type="CollisionShape2D" parent="." unique_id=1158084526]
 position = Vector2(12, 2)
-shape = SubResource("CircleShape2D_jaal5")
 
-[node name="enemy_attack_area" type="Area2D" parent="." unique_id=852180770]
+[node name="enemy_attack_area" type="Area2D" parent="." unique_id=852180770 groups=["enemy_attack"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_attack_area" unique_id=690105694]
+[node name="enemy_attack_area" type="CollisionShape2D" parent="enemy_attack_area" unique_id=690105694 groups=["enemy_attack"]]
 position = Vector2(-90, 78)
 shape = SubResource("RectangleShape2D_jaal5")
+disabled = true
 debug_color = Color(0.90977484, 0.2957548, 0.09832505, 0.41960785)
+
+[node name="enemy_hurtbox" type="Area2D" parent="." unique_id=1056462309 groups=["enemy_hurtbox"]]
+
+[node name="enemy_hurtbox" type="CollisionShape2D" parent="enemy_hurtbox" unique_id=1129848295 groups=["enemy_hurtbox"]]
+position = Vector2(14, -3)
+shape = SubResource("CircleShape2D_pd7lb")
+
+[connection signal="area_entered" from="enemy_hurtbox" to="." method="_on_enemy_hurtbox_area_entered"]
