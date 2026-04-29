@@ -11,7 +11,18 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Label" type="Label" parent="." unique_id=807723973]
+[node name="EnemyPresentLabel" type="Label" parent="." unique_id=807723974]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 16.0
+offset_bottom = 56.0
+grow_horizontal = 2
+text = "debug_enemy is present"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartPromptLabel" type="Label" parent="." unique_id=807723973]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

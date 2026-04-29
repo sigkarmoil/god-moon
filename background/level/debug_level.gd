@@ -1,60 +1,38 @@
 extends Node2D
 
-const PreparationPhaseMenu := preload("res://god-moon/background/level/preparation_phase_menu.tscn")
-
 #################
 #Set of variables to pass
 ################
 var turn_number = 1
 var current_battle_phase: String = "preparation"
-var _menu_instance: Node = null
 
 #+++++++++++++++++++
 #Enemy loader , pick which enemy to pick
 #+++++++++++++++++++
 @onready var current_enemy = $debug_enemy
 @onready var player := $debug_characters
+@onready var preparation_menu := $Preparation_phase_menu
 
 #--------------------
 
 
 #
-#On Ready: set animation to finished
+#On Ready: kick off the loop by entering the preparation phase
 #
 func _ready() -> void:
 	## Pass enemy data to player. Useful to transmit attack type  ++
 	assign_player()
-	
-	
+
+
 	current_enemy.sequence_finished.connect(turn_number_increase)
-	enter_preparation_phase()
+	preparation_menu.enter_preparation_phase(turn_number)
 
 func _process(delta: float) -> void:
 	pass
 
 
 #+++++++++++++++++++
-#Function To Handle Preparation Phase Menu
-#+++++++++++++++++++
-## Preparation Menu Pop Up
-func enter_preparation_phase() -> void:
-	current_battle_phase = "preparation"
-	_menu_instance = PreparationPhaseMenu.instantiate()
-	add_child(_menu_instance)
-	_menu_instance.set_turn_number(turn_number)
-	_menu_instance.space_pressed.connect(_on_space_pressed)
-
-## Start Battle Phase
-func _on_space_pressed() -> void:
-	if _menu_instance != null:
-		_menu_instance.queue_free()
-		_menu_instance = null
-	enter_enemy_attack_phase()
-
-#----------------------
-
-#+++++++++++++++++++
-#Function To Handle Preparation Phase Menu
+#Function To Handle Enemy Attack Phase
 #+++++++++++++++++++
 func enter_enemy_attack_phase() -> void:
 	current_battle_phase = "enemy_attack"
@@ -73,11 +51,12 @@ func _on_Timer_timeout() -> void:
 #----------------------------
 
 #+++++++++++++++++++++++++++
-# Turn number adder
+# Turn number adder - called when enemy sequence finishes,
+# then hands control back to the preparation menu.
 #++++++++++++++++++++++++++++
 func turn_number_increase() -> void:
 	turn_number += 1
-	enter_preparation_phase()
+	preparation_menu.enter_preparation_phase(turn_number)
 
 
 #++++++++++++++++
