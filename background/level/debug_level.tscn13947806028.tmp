@@ -11,7 +11,7 @@ script = ExtResource("1_d1mtj")
 [node name="debug_enemy" parent="." unique_id=1960033771 instance=ExtResource("2_d1mtj")]
 position = Vector2(79, -51)
 
-[node name="debug_characters" parent="." unique_id=163773797 instance=ExtResource("1_5mx0i")]
+[node name="Player" parent="." unique_id=163773797 instance=ExtResource("1_5mx0i")]
 
 [node name="Timer" type="Timer" parent="." unique_id=2003021237]
 wait_time = 0.5
@@ -22,9 +22,9 @@ offset = Vector2(65, -50)
 zoom = Vector2(4, 3)
 
 [node name="Preparation_phase_menu" parent="." unique_id=742750785 instance=ExtResource("4_gshty")]
-offset_left = 62.0
-offset_top = 5.0
-offset_right = 62.0
-offset_bottom = 5.0
+offset_left = 35.0
+offset_top = 22.0
+offset_right = 35.0
+offset_bottom = 22.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

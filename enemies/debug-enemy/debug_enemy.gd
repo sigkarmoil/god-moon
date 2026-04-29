@@ -1,62 +1,71 @@
 extends CharacterBody2D
 
+signal sequence_finished
+
+#
+
+
+#+++++++++++++++++++
+#Animation Sets
+#+++++++++++++++++++
 # Set of animations to be used at turn 1
 var animation_set1: Array[String] = [
-	"strong_attack",
-	"multi_attack",
+	
+	"multi_attack"
 ]
 
 # Set of animations to be used at turn 2
 var animation_set2: Array[String] = [
-	"strong_attack",
-	"multi_attack",
-]
-
-#length of animation
-#variable that holds the sequence. Simplify later
-const SEQUENCE_LENGTH: int = 1
-var queued_sequence: Array[String] = []
-
-#Success: this function is called by the level gdscript during test
-#func level_signal() -> void:
-	#print("level signal")
-
-func _ready() -> void:
-	$Timer.start()
-
-##
-#Animation loader
-##
-#Wait for timer to timeout.
-#load an animation set using play_sequence
-#When the timer runs out, play the sequence
-
-func _on_timer_timeout() -> void:
-	queued_sequence = turn_1_picker(SEQUENCE_LENGTH)
-	await play_sequence(queued_sequence)
-
-###
-#A set of functions to receive data from levels
-###
-	#Function to receive the turn number from level. Determine the set of animation to perform
-func receive_turn_number(value: int) -> void:
-	print("Turn Number: ", value)
 	
-	#Function to see whether the preparation phase is starting or not
-	#Function to see whether the battle phase is starting or not
+	"strong_attack"
+]
+#-------------------
 
-###
-#Action Picking function
-###
-func turn_1_picker(count: int) -> Array[String]:
-	var pool := animation_set1.duplicate()
-	pool.shuffle()
-	var sequence: Array[String] = []
-	for i in count:
-		sequence.append(pool[i % pool.size()])
-	return sequence
+#variable that holds the sequence
+var queued_sequence: String
 
-func play_sequence(sequence: Array[String]) -> void:
-	for anim: String in sequence:
-		$anim.play(anim)
-		await $anim.animation_finished
+#+++++++++++++++++++++++++++++++
+#Action Picking / Playing function
+#+++++++++++++++++++++++++++++++
+### For animation set 1
+func turn_1_picker() -> void:
+	var index := randi_range(0, animation_set1.size() - 1)
+	queued_sequence = animation_set1[index]
+	print("Odd turn loop")
+
+### For animation set 2
+func turn_2_picker() -> void:
+	var index := randi_range(0, animation_set2.size() - 1)
+	queued_sequence = animation_set2[index]
+	print("Even turn loop")
+
+#### Action Playing Function
+func play_sequence() -> void:
+	$anim.play(queued_sequence)
+	await $anim.animation_finished
+	emit_signal("sequence_finished")
+
+#----------------------------------------
+
+#+++++++++++++++++++++++++++++++
+# Determine enemy attack type
+#++++++++++++++++++++++++++++++++
+var is_strong_attack: bool = false
+
+func mark_strong_attack() -> void:
+	is_strong_attack = true
+
+func mark_regular_attack() -> void:
+	is_strong_attack = false
+
+#----------------------------------------
+
+
+#+++++++++++++++++++++++++++++++++++++++++
+#Enemy damage receival function
+#-----------------------------------------
+func _on_enemy_hurtbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("player_attack_area"): ##And attack type strong??
+		print("Enemy got hit")
+
+#-----------------------------------------
