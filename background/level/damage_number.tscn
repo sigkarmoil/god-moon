@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cdgnumber0001"]
+
+[ext_resource type="Script" path="res://god-moon/background/level/damage_number.gd" id="1_script"]
+
+[node name="DamageNumber" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -32.0
+offset_top = -48.0
+offset_right = 32.0
+offset_bottom = -16.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

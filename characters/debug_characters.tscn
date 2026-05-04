@@ -268,6 +268,39 @@ tracks/1/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_sibch"]
+resource_name = "player_vicious_attack"
+step = 0.0167
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.73333335, 0.8166667, 0.8833334, 0.95000005),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 17, 18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_1k46r"]
+resource_name = "player_vulnerable"
+length = 2.0833333
+step = 0.0167
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.81, 1.6666666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [20, 24, 20]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimLib_1"]
 _data = {
 &"RESET": SubResource("Animation_levtn"),
@@ -276,7 +309,9 @@ _data = {
 &"player_defeated": SubResource("Anim_defeated"),
 &"player_idle": SubResource("Anim_idle"),
 &"player_take_damage": SubResource("Anim_damage"),
-&"player_use_relic": SubResource("Anim_relic")
+&"player_use_relic": SubResource("Anim_relic"),
+&"player_vicious_attack": SubResource("Animation_sibch"),
+&"player_vulnerable": SubResource("Animation_1k46r")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r50yq"]

@@ -16,6 +16,12 @@ func enter_preparation_phase(turn_number: int) -> void:
 	visible = true
 	if _level:
 		_level.current_battle_phase = "preparation"
+		var p = _level.player
+		if p and p.has_method("reset_for_turn"):
+			p.reset_for_turn()
+		var e = _level.current_enemy
+		if e and e.has_method("reset_for_turn"):
+			e.reset_for_turn()
 	start_prompt_label.text = "Press space to start Turn " + str(turn_number)
 	_set_player_animations_enabled(false)
 
