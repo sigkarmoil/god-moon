@@ -25,8 +25,8 @@ const DAMAGE_NUMBER_SCENE: PackedScene = preload("res://god-moon/background/leve
 #+++++++++++++++++++++++++
 # Player stats
 #+++++++++++++++++++++++++
-var health: int = 10
 var max_health: int = 15
+var health: int = max_health
 var stamina: int = max_stamina + player_stamina_modifier
 var max_stamina: int = 4
 var player_stamina_modifier: int = 0
@@ -82,16 +82,16 @@ func _update_vicious_input(delta: float) -> void:
 
 
 #+++++++++++++++++++++++++
-# Vicious trigger — plays anim, applies damage directly (the vicious
-# anim does not enable player_attack_area), then asks the enemy to
-# end its vulnerable state so the turn can wrap up.
+# Vicious trigger — plays the anim. Damage is applied by the enemy
+# hurtbox detecting player_attack_area (same flow as counter_parry /
+# counter_dodge), so the player_vicious_attack animation must enable
+# the player_attack_area collision during its active frames.
+# After the anim finishes, ask the enemy to end its vulnerable state
+# so the turn can wrap up.
 #+++++++++++++++++++++++++
 func _trigger_vicious_attack() -> void:
-	var dmg: int = int(attack_data["player_vicious_attack"]["damage"])
-	print("[player] VICIOUS attack triggered (dmg=%d)" % dmg)
+	print("[player] VICIOUS attack triggered")
 	anim.play("player_vicious_attack")
-	if enemy != null and enemy.has_method("take_damage"):
-		enemy.take_damage(dmg)
 	var finished_anim = await anim.animation_finished
 	if finished_anim == "player_vicious_attack" \
 			and enemy != null and enemy.has_method("cut_vulnerable"):
@@ -238,6 +238,15 @@ func _spawn_damage_number(amount: int, color: Color) -> void:
 	get_parent().add_child(dn)
 	dn.global_position = global_position
 	dn.setup(amount, color, false)
+
+
+#+++++++++++++++++++++++++
+# Lock the player out of any further input / animation triggers,
+# without playing the defeated anim. Called by the level when the
+# enemy is defeated (player wins).
+#+++++++++++++++++++++++++
+func freeze() -> void:
+	_is_defeated = true
 
 
 #+++++++++++++++++++++++++

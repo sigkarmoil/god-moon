@@ -18,6 +18,7 @@ var status_ui
 @onready var current_enemy = $debug_enemy
 @onready var player := $debug_characters
 @onready var preparation_menu := $Preparation_phase_menu
+@onready var exploration_scene := $ExplorationScene
 
 #--------------------
 
@@ -29,10 +30,14 @@ func _ready() -> void:
 	## Pass enemy data to player. Useful to transmit attack type  ++
 	assign_player()
 
+	# Hide the victory scene until the enemy is defeated.
+	exploration_scene.visible = false
 
 	current_enemy.sequence_finished.connect(turn_number_increase)
 	if player.has_signal("player_defeated"):
 		player.player_defeated.connect(_on_player_defeated)
+	if current_enemy.has_signal("enemy_defeated"):
+		current_enemy.enemy_defeated.connect(_on_enemy_defeated)
 
 	status_ui = STATUS_UI_SCENE.instantiate()
 	add_child(status_ui)
@@ -97,6 +102,26 @@ func _on_player_defeated() -> void:
 	var go = GAME_OVER_SCENE.instantiate()
 	add_child(go)
 	print("[level] GAME OVER")
+
+
+#+++++++++++++++++++++++++++
+# Enemy defeated — set the same _game_over flag (which already gates
+# every turn / phase / sequence entry point), hide the prep menu,
+# freeze the player, and instantiate the exploration_scene.
+#++++++++++++++++++++++++++++
+func _on_enemy_defeated() -> void:
+	if _game_over:
+		return
+	_game_over = true
+	current_battle_phase = "victory"
+	if preparation_menu:
+		preparation_menu.visible = false
+	if player and player.has_method("freeze"):
+		player.freeze()
+	if current_enemy and current_enemy.anim:
+		current_enemy.anim.play("enemy_defeated")
+	exploration_scene.visible = true
+	print("[level] YOU WIN")
 
 
 func _wait_for_player_idle() -> void:

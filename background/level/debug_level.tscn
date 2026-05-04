@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://b20jdxklnpp1o" path="res://god-moon/background/level/debug_level.gd" id="1_d1mtj"]
 [ext_resource type="PackedScene" uid="uid://i316awpu2dvm" path="res://god-moon/enemies/debug-enemy/debug_enemy.tscn" id="2_d1mtj"]
 [ext_resource type="PackedScene" uid="uid://nyiuwxh813mk" path="res://god-moon/background/level/preparation_phase_menu.tscn" id="4_gshty"]
+[ext_resource type="PackedScene" path="res://god-moon/background/level/exploration_scene.tscn" id="5_7bc1n"]
 
 [node name="debug_level" type="Node2D" unique_id=286960787]
 script = ExtResource("1_d1mtj")
@@ -26,5 +27,11 @@ offset_left = 62.0
 offset_top = 5.0
 offset_right = 62.0
 offset_bottom = 5.0
+
+[node name="ExplorationScene" parent="." unique_id=875215320 instance=ExtResource("5_7bc1n")]
+offset_left = 49.0
+offset_top = -40.0
+offset_right = 49.0
+offset_bottom = -40.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
