@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal sequence_finished
 signal enemy_vulnerable_started
+signal enemy_defeated
 
 @onready var anim: AnimationPlayer = $anim
 
@@ -10,8 +11,8 @@ const DAMAGE_NUMBER_SCENE: PackedScene = preload("res://god-moon/background/leve
 #+++++++++++++++++++++++++
 # Enemy stats
 #+++++++++++++++++++++++++
-var health: int = 30
-var max_health: int = 30
+var max_health: int = 10
+var health: int = max_health 
 var stamina: int = 3
 var max_stamina: int = 3
 var vulnerable_threshold: int = 3
@@ -139,12 +140,33 @@ func take_damage(amount: int) -> void:
 	if amount <= 0:
 		return
 	health = max(0, health - amount)
-	vulnerable_threshold -= amount
 	_spawn_damage_number(amount, Color.ORANGE)
 	print("[enemy] took %d damage — hp=%d/%d threshold=%d"
 		% [amount, health, max_health, vulnerable_threshold])
+	if health <= 0:
+		trigger_defeat()
+		return
+	vulnerable_threshold -= amount
 	if vulnerable_threshold <= 0 and not _vulnerable_active:
 		_trigger_vulnerable()
+
+
+#+++++++++++++++++++++++++
+# Defeat — plays "enemy_defeated" and emits enemy_defeated after the
+# anim finishes. Sets _interrupted so any in-flight play_sequence loop
+# breaks out instead of stepping to the next queued action.
+#+++++++++++++++++++++++++
+func trigger_defeat() -> void:
+	_interrupted = true
+	_vulnerable_active = false
+	anim.animation_finished.connect(_on_anim_finished_for_defeat, CONNECT_ONE_SHOT)
+	anim.play("enemy_defeated")
+	print("[enemy] DEFEATED")
+
+
+func _on_anim_finished_for_defeat(anim_name: StringName) -> void:
+	if anim_name == "enemy_defeated":
+		emit_signal("enemy_defeated")
 
 
 #+++++++++++++++++++++++++
