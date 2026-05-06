@@ -45,9 +45,6 @@ func _ready() -> void:
 
 	preparation_menu.enter_preparation_phase(turn_number)
 
-func _process(delta: float) -> void:
-	pass
-
 
 #+++++++++++++++++++
 #Function To Handle Enemy Attack Phase
@@ -78,6 +75,19 @@ func _on_Timer_timeout() -> void:
 #++++++++++++++++++++++++++++
 func turn_number_increase() -> void:
 	if _game_over:
+		return
+	StatusEffects.tick_effects(player)
+	StatusEffects.tick_effects(current_enemy)
+	# Tick damage may have killed either entity. The defeat animation /
+	# signal fires asynchronously, so check health here to stop the turn
+	# from continuing into the preparation phase.
+	if current_enemy.health <= 0:
+		if not _game_over:
+			_on_enemy_defeated()
+		return
+	if player.health <= 0:
+		if not _game_over:
+			_on_player_defeated()
 		return
 	turn_number += 1
 	# Wait until the player isn't mid-animation (vulnerable, take_damage, etc.)

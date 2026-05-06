@@ -41,7 +41,7 @@ func _on_space_pressed() -> void:
 	visible = false
 	if _level and _level.has_method("enter_enemy_attack_phase"):
 		_level.enter_enemy_attack_phase()
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.1).timeout
 	_set_player_animations_enabled(true)
 
 func _set_player_animations_enabled(enabled: bool) -> void:

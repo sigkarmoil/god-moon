@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Relic" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://god-moon/systems/relic.gd" id="1_relic"]
+
+[resource]
+script = ExtResource("1_relic")
+name = "Smoldering Coal"
+godhood_requirement = 0
+gaib_cost = 1
+status_effect = "burn"
+status_effect_quantity = 3
+icon_on_acquire = "res://resources/relics/smoldering_coal_small.png"
+icon_small = "res://resources/relics/smoldering_coal_small.png"
+apply_to = "enemy"

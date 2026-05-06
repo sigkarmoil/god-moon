@@ -3,8 +3,12 @@ extends CharacterBody2D
 signal sequence_finished
 signal enemy_vulnerable_started
 signal enemy_defeated
+signal effects_changed
 
 @onready var anim: AnimationPlayer = $anim
+
+# Status effects state
+var active_effects: Dictionary = {}
 
 const DAMAGE_NUMBER_SCENE: PackedScene = preload("res://god-moon/background/level/damage_number.tscn")
 

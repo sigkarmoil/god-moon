@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://d02lcwnchxdjj"]
+
+[ext_resource type="Script" uid="uid://1tqn13o0gwuw" path="res://god-moon/systems/relic.gd" id="1_relic"]
+
+[resource]
+script = ExtResource("1_relic")
+name = "Smoldering Coal"
+gaib_cost = 1
+status_effect = "stack_reader"
+status_effect_quantity = 3
+icon_on_acquire = "res://resources/relics/stackreader.png"
+icon_small = "res://resources/relics/stackreader.png"

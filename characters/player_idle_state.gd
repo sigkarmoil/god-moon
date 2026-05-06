@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 signal player_defeated
+signal effects_changed
+signal gaib_changed
 
 # Direct reference to the AnimationPlayer node named "anim" on this Player.
 # This is the only way animations are played in this script.
@@ -8,6 +10,23 @@ signal player_defeated
 
 ## Variable to allow extraction of enemy data.
 var enemy: CharacterBody2D = null
+
+## +++++++++++++ Set a default Relic
+const STACK_READER_RELIC: Resource = preload("res://god-moon/resources/relics/stack_reader.tres")
+const SMOLDERING_COAL_RELIC: Resource = preload("res://god-moon/resources/relics/smoldering_coal.tres")
+## -------------- Set a default Relic
+
+# Status effects + relic state
+var active_effects: Dictionary = {}
+var owned_relics: Array = [STACK_READER_RELIC, SMOLDERING_COAL_RELIC]
+var relic_slot_0 = SMOLDERING_COAL_RELIC
+var relic_slot_1 = null
+var relic_slot_2 = null
+var godhood_level: int = 0
+
+# Relic pending activation — set by player_input(), consumed by
+# the Call Method Track in the player_use_relic animation.
+var _pending_relic = null
 
 # Animations that lock out all player input while playing.
 const LOCKING_ANIMS: Array[String] = [
@@ -27,11 +46,14 @@ const DAMAGE_NUMBER_SCENE: PackedScene = preload("res://god-moon/background/leve
 #+++++++++++++++++++++++++
 var max_health: int = 15
 var health: int = max_health
-var stamina: int = max_stamina + player_stamina_modifier
 var max_stamina: int = 4
 var player_stamina_modifier: int = 0
+var stamina: int = max_stamina + player_stamina_modifier
+var defense_reset_value: int = 3
 var defense: int = 3
-const DEFENSE_RESET_VALUE: int = 3
+var gaib: int = 10
+
+
 
 #+++++++++++++++++++++++++
 # Player attack data
@@ -103,7 +125,7 @@ func _trigger_vicious_attack() -> void:
 #+++++++++++++++++++++++++
 func reset_for_turn() -> void:
 	stamina = max_stamina + player_stamina_modifier
-	defense = DEFENSE_RESET_VALUE
+	defense = defense_reset_value
 	print("[player] turn reset — stamina=%d defense=%d hp=%d/%d"
 		% [stamina, defense, health, max_health])
 
@@ -123,8 +145,21 @@ func player_input():
 	elif Input.is_action_just_pressed("dodge") and not vulnerable_window:
 		_try_play_attack("player_counter_dodge")
 	elif Input.is_action_just_pressed("use_relic"):
-		# use_relic does NOT consume stamina
-		anim.play("player_use_relic")
+		# Determine which relic slot to activate based on held modifiers.
+		var slot_index: int = 0
+		if Input.is_action_pressed("dodge"):
+			slot_index = 2
+		elif Input.is_action_pressed("parry"):
+			slot_index = 1
+		if slot_index <= godhood_level:
+			var relic = null
+			match slot_index:
+				0: relic = relic_slot_0
+				1: relic = relic_slot_1
+				2: relic = relic_slot_2
+			if relic != null and gaib >= int(relic.gaib_cost):
+				_pending_relic = relic
+				anim.play("player_use_relic")
 	elif not anim.is_playing():
 		anim.play("player_idle")
 
@@ -147,6 +182,26 @@ func _try_play_attack(anim_name: String) -> void:
 	stamina -= cost
 	print("[player] %s — stamina now %d" % [anim_name, stamina])
 	anim.play(anim_name)
+
+#+++++++++++++++++++++++++
+# Relic activation — called by the Call Method Track in the
+# player_use_relic animation. Deducts Ga'ib, picks target, and
+# fires the status effect. If the animation is interrupted before
+# this frame fires, neither Ga'ib nor effect are spent.
+#+++++++++++++++++++++++++
+func activate_pending_relic() -> void:
+	if _pending_relic == null:
+		return
+	var relic = _pending_relic
+	_pending_relic = null
+	gaib -= int(relic.gaib_cost)
+	emit_signal("gaib_changed")
+	var target = self if relic.apply_to == "player" else enemy
+	if target == null:
+		return
+	StatusEffects.apply_effect(relic.status_effect, target, int(relic.status_effect_quantity))
+	print("[player] relic '%s' activated — gaib now %d" % [relic.name, gaib])
+
 
 #+++++++++++++++++++++++++
 # Player damage recognition system
