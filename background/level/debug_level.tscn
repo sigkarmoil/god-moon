@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b20jdxklnpp1o" path="res://god-moon/background/level/debug_level.gd" id="1_d1mtj"]
 [ext_resource type="PackedScene" uid="uid://i316awpu2dvm" path="res://god-moon/enemies/debug-enemy/debug_enemy.tscn" id="2_d1mtj"]
 [ext_resource type="PackedScene" uid="uid://nyiuwxh813mk" path="res://god-moon/background/level/preparation_phase_menu.tscn" id="4_gshty"]
-[ext_resource type="PackedScene" path="res://god-moon/background/level/exploration_scene.tscn" id="5_7bc1n"]
+[ext_resource type="PackedScene" uid="uid://drmafpmhr4pue" path="res://god-moon/background/level/exploration_scene.tscn" id="5_7bc1n"]
 
 [node name="debug_level" type="Node2D" unique_id=286960787]
 script = ExtResource("1_d1mtj")

@@ -1,14 +1,13 @@
 [gd_scene format=3 uid="uid://b8hl7uacdeaea"]
 
-[ext_resource type="Script" path="res://god-moon/background/level/status_ui.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://y2jhgyusgrhr" path="res://god-moon/background/level/status_ui.gd" id="1_script"]
 
-[node name="StatusUI" type="CanvasLayer"]
+[node name="StatusUI" type="CanvasLayer" unique_id=597824180]
 script = ExtResource("1_script")
 
-[node name="PlayerStatus" type="Label" parent="."]
-anchor_left = 0.0
+[node name="PlayerStatus" type="Label" parent="." unique_id=1168112090]
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 0.0
 anchor_bottom = 1.0
 offset_left = 16.0
 offset_top = -96.0
@@ -18,45 +17,51 @@ text = "HP: 10 / 15
 Stamina: 4
 Defense: 3"
 
-[node name="GaibLabel" type="Label" parent="."]
-anchor_left = 0.0
+[node name="GaibLabel" type="Label" parent="." unique_id=1843531651]
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -144.0
+offset_right = 256.0
+offset_bottom = -120.0
+text = "Ga'ib: 0"
+
+[node name="GodhoodLabel" type="Label" parent="." unique_id=2052390088]
+anchors_preset = 2
+anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
 offset_top = -120.0
 offset_right = 256.0
 offset_bottom = -96.0
-text = "Ga'ib: 0"
+text = "Godhood: Lv 1  (0 / 200)"
 
-[node name="PlayerEffectsRow" type="HBoxContainer" parent="."]
-anchor_left = 0.0
+[node name="PlayerEffectsRow" type="HBoxContainer" parent="." unique_id=2081823379]
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 0.0
 anchor_bottom = 1.0
 offset_left = 16.0
-offset_top = -156.0
+offset_top = -180.0
 offset_right = 400.0
-offset_bottom = -120.0
+offset_bottom = -144.0
 
-[node name="EnemyStatus" type="Label" parent="."]
+[node name="EnemyStatus" type="Label" parent="." unique_id=671857667]
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 0.0
 offset_left = -256.0
 offset_top = 16.0
 offset_right = -16.0
 offset_bottom = 80.0
-horizontal_alignment = 2
 text = "HP: 30 / 30
 Stamina: 3"
+horizontal_alignment = 2
 
-[node name="EnemyEffectsRow" type="HBoxContainer" parent="."]
+[node name="EnemyEffectsRow" type="HBoxContainer" parent="." unique_id=800775743]
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 0.0
 offset_left = -256.0
 offset_top = 88.0
 offset_right = -16.0

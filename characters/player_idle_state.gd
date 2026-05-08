@@ -22,7 +22,15 @@ var owned_relics: Array = [STACK_READER_RELIC, SMOLDERING_COAL_RELIC]
 var relic_slot_0 = SMOLDERING_COAL_RELIC
 var relic_slot_1 = null
 var relic_slot_2 = null
-var godhood_level: int = 0
+var godhood_level: int = 1
+var godhood_meter: int = 0
+
+const GODHOOD_METER_MAX: int = 200
+const GODHOOD_LEVEL_2_THRESHOLD: int = 100
+const GODHOOD_LEVEL_3_THRESHOLD: int = 199
+const PARRY_METER_GAIN: int = 50
+const DODGE_METER_GAIN: int = 75
+const VICIOUS_METER_GAIN: int = 100
 
 # Relic pending activation — set by player_input(), consumed by
 # the Call Method Track in the player_use_relic animation.
@@ -44,7 +52,7 @@ const DAMAGE_NUMBER_SCENE: PackedScene = preload("res://god-moon/background/leve
 #+++++++++++++++++++++++++
 # Player stats
 #+++++++++++++++++++++++++
-var max_health: int = 15
+var max_health: int = 150
 var health: int = max_health
 var max_stamina: int = 4
 var player_stamina_modifier: int = 0
@@ -151,7 +159,7 @@ func player_input():
 			slot_index = 2
 		elif Input.is_action_pressed("parry"):
 			slot_index = 1
-		if slot_index <= godhood_level:
+		if slot_index < godhood_level:
 			var relic = null
 			match slot_index:
 				0: relic = relic_slot_0
@@ -241,6 +249,39 @@ func resolve_hit() -> void:
 		print("[player] parried")
 		return
 	_apply_enemy_damage()
+
+
+#+++++++++++++++++++++++++
+# Call Method Track entry points — wired in the player AnimationPlayer
+# for player_counter_parry, player_counter_dodge, player_vicious_attack.
+#+++++++++++++++++++++++++
+func gain_godhood_parry() -> void:
+	_add_godhood_meter(PARRY_METER_GAIN)
+
+func gain_godhood_dodge() -> void:
+	_add_godhood_meter(DODGE_METER_GAIN)
+
+func gain_godhood_vicious() -> void:
+	_add_godhood_meter(VICIOUS_METER_GAIN)
+
+#+++++++++++++++++++++++++
+# Godhood meter — climbs from animation method track callbacks, never
+# goes down mid-battle. Crossing thresholds bumps godhood_level (1 → 2 → 3),
+# which the prep menu reads to unlock additional relic slots.
+#+++++++++++++++++++++++++
+func _add_godhood_meter(amount: int) -> void:
+	if amount <= 0:
+		return
+	godhood_meter = min(godhood_meter + amount, GODHOOD_METER_MAX)
+	var new_level: int = 1
+	if godhood_meter >= GODHOOD_LEVEL_3_THRESHOLD:
+		new_level = 3
+	elif godhood_meter >= GODHOOD_LEVEL_2_THRESHOLD:
+		new_level = 2
+	if new_level != godhood_level:
+		godhood_level = new_level
+		print("[player] godhood level → %d" % godhood_level)
+	print("[player] godhood meter: %d / %d" % [godhood_meter, GODHOOD_METER_MAX])
 
 
 #+++++++++++++++++++++++++

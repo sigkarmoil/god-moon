@@ -13,9 +13,15 @@ var active_effects: Dictionary = {}
 const DAMAGE_NUMBER_SCENE: PackedScene = preload("res://god-moon/background/level/damage_number.tscn")
 
 #+++++++++++++++++++++++++
+# Enemy identity
+#+++++++++++++++++++++++++
+var enemy_name: String = "debug_enemy"
+var enemy_description: String = "Just a prototype enemy"
+
+#+++++++++++++++++++++++++
 # Enemy stats
 #+++++++++++++++++++++++++
-var max_health: int = 10
+var max_health: int = 100
 var health: int = max_health 
 var stamina: int = 3
 var max_stamina: int = 3

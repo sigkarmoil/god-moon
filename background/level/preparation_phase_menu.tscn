@@ -11,22 +11,197 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="EnemyPresentLabel" type="Label" parent="." unique_id=807723974]
+[node name="TopSection" type="VBoxContainer" parent="." unique_id=329111625]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 16.0
-offset_bottom = 56.0
+offset_top = -140.0
+offset_bottom = 260.0
 grow_horizontal = 2
-text = "debug_enemy is present"
+
+[node name="EnemyNameLabel" type="Label" parent="TopSection" unique_id=606396062]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="EnemyDescriptionLabel" type="Label" parent="TopSection" unique_id=571424085]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="EnemyEffectsRow" type="HBoxContainer" parent="TopSection" unique_id=279034215]
+layout_mode = 2
+alignment = 1
+
+[node name="EffectTooltipPopup" type="PanelContainer" parent="." unique_id=1115657389]
+top_level = true
+layout_mode = 0
+mouse_filter = 2
+
+[node name="TooltipBox" type="VBoxContainer" parent="EffectTooltipPopup" unique_id=1637910197]
+layout_mode = 2
+
+[node name="EffectTooltipNameLabel" type="Label" parent="EffectTooltipPopup/TooltipBox" unique_id=906053826]
+layout_mode = 2
+
+[node name="EffectTooltipExplanationLabel" type="Label" parent="EffectTooltipPopup/TooltipBox" unique_id=359695689]
+layout_mode = 2
+
+[node name="RelicSlotsRow" type="HBoxContainer" parent="." unique_id=1615413969]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -100.0
+offset_right = 300.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Slot1" type="PanelContainer" parent="RelicSlotsRow" unique_id=313236484]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+
+[node name="Slot1Box" type="VBoxContainer" parent="RelicSlotsRow/Slot1" unique_id=6291604]
+layout_mode = 2
+
+[node name="Slot1Icon" type="TextureRect" parent="RelicSlotsRow/Slot1/Slot1Box" unique_id=875673906]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot1Label" type="Label" parent="RelicSlotsRow/Slot1/Slot1Box" unique_id=487479612]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Slot1Arrows" type="HBoxContainer" parent="RelicSlotsRow/Slot1/Slot1Box" unique_id=545264288]
+layout_mode = 2
+alignment = 1
+
+[node name="Slot1Left" type="Button" parent="RelicSlotsRow/Slot1/Slot1Box/Slot1Arrows" unique_id=252647575]
+layout_mode = 2
+text = "<"
+
+[node name="Slot1Right" type="Button" parent="RelicSlotsRow/Slot1/Slot1Box/Slot1Arrows" unique_id=577984504]
+layout_mode = 2
+text = ">"
+
+[node name="Slot2" type="PanelContainer" parent="RelicSlotsRow" unique_id=1018437683]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+
+[node name="Slot2Box" type="VBoxContainer" parent="RelicSlotsRow/Slot2" unique_id=1750565285]
+layout_mode = 2
+
+[node name="Slot2Icon" type="TextureRect" parent="RelicSlotsRow/Slot2/Slot2Box" unique_id=569365891]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot2Label" type="Label" parent="RelicSlotsRow/Slot2/Slot2Box" unique_id=421954209]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Slot2Arrows" type="HBoxContainer" parent="RelicSlotsRow/Slot2/Slot2Box" unique_id=747151675]
+layout_mode = 2
+alignment = 1
+
+[node name="Slot2Left" type="Button" parent="RelicSlotsRow/Slot2/Slot2Box/Slot2Arrows" unique_id=1410057419]
+layout_mode = 2
+text = "<"
+
+[node name="Slot2Right" type="Button" parent="RelicSlotsRow/Slot2/Slot2Box/Slot2Arrows" unique_id=436224804]
+layout_mode = 2
+text = ">"
+
+[node name="Slot3" type="PanelContainer" parent="RelicSlotsRow" unique_id=1773264545]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+
+[node name="Slot3Box" type="VBoxContainer" parent="RelicSlotsRow/Slot3" unique_id=929141528]
+layout_mode = 2
+
+[node name="Slot3Icon" type="TextureRect" parent="RelicSlotsRow/Slot3/Slot3Box" unique_id=20056567]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot3Label" type="Label" parent="RelicSlotsRow/Slot3/Slot3Box" unique_id=1746957180]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Slot3Arrows" type="HBoxContainer" parent="RelicSlotsRow/Slot3/Slot3Box" unique_id=538044054]
+layout_mode = 2
+alignment = 1
+
+[node name="Slot3Left" type="Button" parent="RelicSlotsRow/Slot3/Slot3Box/Slot3Arrows" unique_id=1131244536]
+layout_mode = 2
+text = "<"
+
+[node name="Slot3Right" type="Button" parent="RelicSlotsRow/Slot3/Slot3Box/Slot3Arrows" unique_id=2085610370]
+layout_mode = 2
+text = ">"
+
+[node name="BackgroundDimmer" type="ColorRect" parent="." unique_id=144626302]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="RelicInfoPopup" type="PopupPanel" parent="." unique_id=128837183]
+transparent_bg = false
+size = Vector2i(280, 320)
+
+[node name="RelicInfoBox" type="VBoxContainer" parent="RelicInfoPopup" unique_id=1088440048]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 276.0
+offset_bottom = 316.0
+
+[node name="RelicArtwork" type="TextureRect" parent="RelicInfoPopup/RelicInfoBox" unique_id=1599097049]
+custom_minimum_size = Vector2(256, 200)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RelicDescriptionLabel" type="Label" parent="RelicInfoPopup/RelicInfoBox" unique_id=804081861]
+layout_mode = 2
+autowrap_mode = 2
 
 [node name="StartPromptLabel" type="Label" parent="." unique_id=807723973]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 95.0
+offset_right = 3.0
+offset_bottom = 95.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Press space to start Turn 1"

@@ -4,7 +4,9 @@
 
 [resource]
 script = ExtResource("1_relic")
-name = "Smoldering Coal"
+name = "Stack Reader"
+description = "Prints the current stack count of an applied effect to the console."
+godhood_requirement = 1
 gaib_cost = 1
 status_effect = "stack_reader"
 status_effect_quantity = 3

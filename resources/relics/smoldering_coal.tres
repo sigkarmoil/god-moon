@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="Relic" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://c0cxxln186pv7"]
 
-[ext_resource type="Script" path="res://god-moon/systems/relic.gd" id="1_relic"]
+[ext_resource type="Script" uid="uid://1tqn13o0gwuw" path="res://god-moon/systems/relic.gd" id="1_relic"]
 
 [resource]
 script = ExtResource("1_relic")
 name = "Smoldering Coal"
-godhood_requirement = 0
+description = "Applies 3 stacks of Burn to the enemy. Each stack deals 1 damage at turn end."
+godhood_requirement = 1
 gaib_cost = 1
 status_effect = "burn"
 status_effect_quantity = 3

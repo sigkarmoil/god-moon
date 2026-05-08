@@ -2,6 +2,7 @@ extends Resource
 class_name Relic
 
 @export var name: String = ""
+@export var description: String = ""
 @export var godhood_requirement: int = 0
 @export var gaib_cost: int = 0
 @export var status_effect: String = ""

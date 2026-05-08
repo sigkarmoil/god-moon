@@ -3,6 +3,7 @@ extends CanvasLayer
 @onready var player_label: Label = $PlayerStatus
 @onready var enemy_label: Label = $EnemyStatus
 @onready var gaib_label: Label = $GaibLabel
+@onready var godhood_label: Label = $GodhoodLabel
 @onready var player_effects_row: HBoxContainer = $PlayerEffectsRow
 @onready var enemy_effects_row: HBoxContainer = $EnemyEffectsRow
 
@@ -28,6 +29,9 @@ func _process(_delta: float) -> void:
 	if player != null and is_instance_valid(player):
 		player_label.text = "HP: %d / %d\nStamina: %d\nDefense: %d" % [
 			player.health, player.max_health, player.stamina, player.defense
+		]
+		godhood_label.text = "Godhood: Lv %d  (%d / %d)" % [
+			player.godhood_level, player.godhood_meter, player.GODHOOD_METER_MAX
 		]
 	if enemy != null and is_instance_valid(enemy):
 		enemy_label.text = "HP: %d / %d\nStamina: %d" % [

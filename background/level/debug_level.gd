@@ -6,6 +6,7 @@ extends Node2D
 var turn_number = 1
 var current_battle_phase: String = "preparation"
 var _game_over: bool = false
+var slot_assignments: Array = [null, null, null]
 
 const GAME_OVER_SCENE := preload("res://god-moon/background/level/game_over.tscn")
 const STATUS_UI_SCENE := preload("res://god-moon/background/level/status_ui.tscn")
@@ -38,12 +39,26 @@ func _ready() -> void:
 		player.player_defeated.connect(_on_player_defeated)
 	if current_enemy.has_signal("enemy_defeated"):
 		current_enemy.enemy_defeated.connect(_on_enemy_defeated)
+	preparation_menu.prep_confirmed.connect(_on_prep_confirmed)
 
 	status_ui = STATUS_UI_SCENE.instantiate()
 	add_child(status_ui)
 	status_ui.bind(player, current_enemy)
 
 	preparation_menu.enter_preparation_phase(turn_number)
+
+
+#+++++++++++++++++++
+# Preparation phase confirmed — store slot assignments and proceed
+# to the enemy attack phase.
+#+++++++++++++++++++
+func _on_prep_confirmed(assignments: Array) -> void:
+	slot_assignments = assignments
+	if player:
+		player.relic_slot_0 = assignments[0]
+		player.relic_slot_1 = assignments[1]
+		player.relic_slot_2 = assignments[2]
+	enter_enemy_attack_phase()
 
 
 #+++++++++++++++++++
